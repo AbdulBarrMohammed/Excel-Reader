@@ -1,36 +1,33 @@
-﻿using System.Data;
+﻿using System;
+using System.IO;
 using OfficeOpenXml;
 
-class Progam
+
+class Program
 {
     static void Main(string[] args)
     {
-        string filePath = "data/jobs.xlsx";
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-        var file = new FileInfo(filePath);
-    }
-}
+;
 
+        string filePath = "data/jobs.xlsx";
+        FileInfo existingFile = new FileInfo(filePath);
 
-
-
-
-/*
-void readXLS(string FilePath)
-{
-    FileInfo existingFile = new FileInfo(FilePath);
-    using (ExcelPackage package = new ExcelPackage(existingFile))
-    {
-        //get the first worksheet in the workbook
-        ExcelWorksheet worksheet = package.Workbook.Worksheets[1];
-        int colCount = worksheet.Dimension.End.Column;  //get Column Count
-        int rowCount = worksheet.Dimension.End.Row;     //get row count
-        for (int row = 1; row <= rowCount; row++)
+        using (ExcelPackage package = new ExcelPackage(existingFile))
         {
-            for (int col = 1; col <= colCount; col++)
+            // Get the first worksheet (index 0 = first worksheet)
+            ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
+
+            int colCount = worksheet.Dimension.End.Column;  // Column count
+            int rowCount = worksheet.Dimension.End.Row;     // Row count
+
+            for (int row = 1; row <= rowCount; row++)
             {
-                Console.WriteLine(" Row:" + row + " column:" + col + " Value:" + worksheet.Cells[row, col].Value.ToString().Trim());
+                for (int col = 1; col <= colCount; col++)
+                {
+                    Console.WriteLine($"Row: {row}, Column: {col}, Value: {worksheet.Cells[row, col].Value?.ToString().Trim()}");
+                }
             }
         }
     }
-} */
+}
