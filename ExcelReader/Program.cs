@@ -23,10 +23,16 @@ class Program
 
             for (int row = 1; row <= rowCount; row++)
             {
+                /*
                 for (int col = 1; col <= colCount; col++)
                 {
                     Console.WriteLine($"Row: {row}, Column: {col}, Value: {worksheet.Cells[row, col].Value?.ToString().Trim()}");
-                }
+                } */
+                Console.WriteLine($"Row: {row}, Column: {1}, Value: {worksheet.Cells[row, 1].Value?.ToString().Trim()}");
+                Console.WriteLine($"Row: {row}, Column: {2}, Value: {worksheet.Cells[row, 2].Value?.ToString().Trim()}");
+                Console.WriteLine($"Row: {row}, Column: {3}, Value: {worksheet.Cells[row, 3].Value?.ToString().Trim()}");
+                Console.WriteLine($"Row: {row}, Column: {4}, Value: {worksheet.Cells[row, 4].Value?.ToString().Trim()}");
+                Console.WriteLine("\n");
             }
         }
     }
