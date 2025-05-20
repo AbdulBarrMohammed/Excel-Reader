@@ -7,16 +7,16 @@ using ExcelReader.Model;
 
 namespace ExcelReader.Controller
 {
-    public class LegoController
+    static class LegoController
     {
-        public void AddLego(string name, int numOfPieces, decimal price)
+        public static void AddLego(string name, int numOfPieces, decimal price)
         {
             using var db = new LegoDBContext();
             db.Add(new LegoSet { Name = name, NumOfPieces = numOfPieces, Price = price });
             db.SaveChanges();
         }
 
-        public void DeleteAllLegos()
+        public static void DeleteAllLegos()
         {
 
         }

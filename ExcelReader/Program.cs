@@ -1,12 +1,17 @@
 ﻿using System;
 using System.IO;
+using ExcelReader.Controller;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using OfficeOpenXml;
 
 
 class Program
 {
+
     static void Main(string[] args)
     {
+
+
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
         ;
 
@@ -22,21 +27,30 @@ class Program
 
             for (int row = 1; row <= rowCount; row++)
             {
-                /*
-                for (int col = 1; col <= colCount; col++)
-                {
-                    Console.WriteLine($"Row: {row}, Column: {col}, Value: {worksheet.Cells[row, col].Value?.ToString().Trim()}");
-                } */
+
                 Console.WriteLine($"Row: {row}, Column: {1}, Value: {int.Parse(worksheet.Cells[row, 1].Value?.ToString().Trim())}");
                 Console.WriteLine($"Row: {row}, Column: {2}, Value: {worksheet.Cells[row, 2].Value?.ToString().Trim()}");
                 Console.WriteLine($"Row: {row}, Column: {3}, Value: {int.Parse(worksheet.Cells[row, 3].Value?.ToString().Trim())}");
                 Console.WriteLine($"Row: {row}, Column: {4}, Value: {Convert.ToDecimal(worksheet.Cells[row, 4].Value?.ToString().Trim())}");
                 Console.WriteLine("\n");
+
+                /*
+                string name = worksheet.Cells[row, 2].Value?.ToString().Trim();
+                int pieces = int.Parse(worksheet.Cells[row, 3].Value?.ToString().Trim());
+                decimal price = Convert.ToDecimal(worksheet.Cells[row, 4].Value?.ToString().Trim());
+                InsertLego(name, pieces, price); */
             }
         }
     }
 
+
+
     // Add excel data to sql database
+
+    internal static void InsertLego(string name, int numOfPieces, decimal price)
+    {
+        LegoController.AddLego(name, numOfPieces, price);
+    }
 
     // Remove data from sql database
 
