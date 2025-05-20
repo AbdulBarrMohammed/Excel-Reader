@@ -11,7 +11,7 @@ class Program
     static void Main(string[] args)
     {
 
-
+        /*
         ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
         ;
 
@@ -28,6 +28,7 @@ class Program
             for (int row = 1; row <= rowCount; row++)
             {
 
+
                 Console.WriteLine($"Row: {row}, Column: {1}, Value: {int.Parse(worksheet.Cells[row, 1].Value?.ToString().Trim())}");
                 Console.WriteLine($"Row: {row}, Column: {2}, Value: {worksheet.Cells[row, 2].Value?.ToString().Trim()}");
                 Console.WriteLine($"Row: {row}, Column: {3}, Value: {int.Parse(worksheet.Cells[row, 3].Value?.ToString().Trim())}");
@@ -38,9 +39,13 @@ class Program
                 string name = worksheet.Cells[row, 2].Value?.ToString().Trim();
                 int pieces = int.Parse(worksheet.Cells[row, 3].Value?.ToString().Trim());
                 decimal price = Convert.ToDecimal(worksheet.Cells[row, 4].Value?.ToString().Trim());
-                InsertLego(name, pieces, price); */
+                InsertLego(name, pieces, price);
             }
-        }
+        } */
+
+        DisplayLegos();
+
+
     }
 
 
@@ -55,4 +60,13 @@ class Program
     // Remove data from sql database
 
     // Display data from sql database
+
+    internal static void DisplayLegos()
+    {
+        var legosList = LegoController.DisplayAllLegos();
+        foreach (var lego in legosList)
+        {
+            Console.WriteLine($"\nLego Set Name: {lego.Name}\n Number of Pieces: {lego.NumOfPieces}\n Price: ${lego.Price}");
+        }
+    }
 }
