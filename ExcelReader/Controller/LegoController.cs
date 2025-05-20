@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ExcelReader.Data;
 using ExcelReader.Model;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 namespace ExcelReader.Controller
 {
@@ -18,7 +19,9 @@ namespace ExcelReader.Controller
 
         public static void DeleteAllLegos()
         {
-
+            var db = new LegoDBContext();
+            db.Legos.RemoveRange(db.Legos);
+            db.SaveChanges();
         }
 
         public static List<LegoSet> DisplayAllLegos()
